@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Opening in Obsidian...</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #1e1e1e;
+      color: #a88bfa;
+    }
+    .container {
+      text-align: center;
+    }
+    a {
+      color: #a88bfa;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p>Opening in Obsidian...</p>
+    <p><a id="fallback" href="#">Click here if it doesn't open automatically</a></p>
+  </div>
+  <script>
+    const params = window.location.search.slice(1);
+    if (params) {
+      const obsidianUrl = 'obsidian://open?' + params;
+      document.getElementById('fallback').href = obsidianUrl;
+      window.location = obsidianUrl;
+    } else {
+      document.querySelector('.container').innerHTML = '<p>Missing parameters. Use ?vault=...&file=...</p>';
+    }
+  </script>
+</body>
+</html>
