@@ -29,7 +29,16 @@
     <p><a id="fallback" href="#">Click here if it doesn't open automatically</a></p>
   </div>
   <script>
-    const params = window.location.search.slice(1);
+    // The projects' docs vaults were combined into desk on 2026-09-30, each at its own folder:
+    // vault=kitchen-docs&file=X now opens as vault=desk&file=kitchen-docs/X, so old links keep working.
+    const MOVED_TO_DESK = ['kitchen-docs', 'artwork-docs', 'coyote-docs', 'foxy-docs', 'tracer-docs'];
+    const query = new URLSearchParams(window.location.search);
+    const vault = query.get('vault');
+    if (MOVED_TO_DESK.includes(vault)) {
+      query.set('vault', 'desk');
+      query.set('file', vault + '/' + (query.get('file') || ''));
+    }
+    const params = query.toString().replace(/\+/g, '%20');
     if (params) {
       const obsidianUrl = 'obsidian://open?' + params;
       document.getElementById('fallback').href = obsidianUrl;

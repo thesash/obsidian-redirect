@@ -5,6 +5,9 @@ from pathlib import Path
 from urllib.parse import quote
 
 REDIRECT = "https://thesash.github.io/obsidian-redirect/"
+# Docs folders that Sash opens inside the desk vault, at desk/<folder>. Agents edit them in their repo
+# checkouts (~/p/kitchen/kitchen-docs), which still have their own .obsidian.
+IN_DESK = {"kitchen-docs", "artwork-docs", "coyote-docs", "foxy-docs", "tracer-docs"}
 
 
 def vault_root(path: Path):
@@ -22,7 +25,10 @@ def link(arg: str) -> str:
     rel = path.relative_to(root).as_posix()
     if rel.endswith(".md"):
         rel = rel[:-3]
-    url = f"{REDIRECT}?vault={quote(root.name, safe='')}&file={quote(rel, safe='')}"
+    vault = root.name
+    if vault in IN_DESK:
+        vault, rel = "desk", f"{vault}/{rel}"
+    url = f"{REDIRECT}?vault={quote(vault, safe='')}&file={quote(rel, safe='')}"
     return f"[{path.stem if path.suffix == '.md' else path.name}]({url})"
 
 
