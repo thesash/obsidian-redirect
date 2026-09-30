@@ -34,9 +34,21 @@
     const MOVED_TO_DESK = ['kitchen-docs', 'artwork-docs', 'coyote-docs', 'foxy-docs', 'tracer-docs'];
     const query = new URLSearchParams(window.location.search);
     const vault = query.get('vault');
+    // Their sessions moved to desk's own Sessions/ folder on 2026-10-01; two were renamed to stay unique.
+    const RENAMED = {
+      'artwork-docs/2026-09-27 Cross-product review': '2026-09-27 Artwork cross-product review',
+      'coyote-docs/2026-09-27 Cross-product review': '2026-09-27 Coyote cross-product review',
+    };
     if (MOVED_TO_DESK.includes(vault)) {
+      let file = query.get('file') || '';
+      const session = file.match(/^Sessions\/([^/]+)(.*)$/);
+      if (session) {
+        file = 'Sessions/' + (RENAMED[vault + '/' + session[1]] || session[1]) + session[2];
+      } else {
+        file = vault + '/' + file;
+      }
       query.set('vault', 'desk');
-      query.set('file', vault + '/' + (query.get('file') || ''));
+      query.set('file', file);
     }
     const params = query.toString().replace(/\+/g, '%20');
     if (params) {
