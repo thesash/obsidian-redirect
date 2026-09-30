@@ -22,3 +22,11 @@ Telegram (and other apps) don't support `obsidian://` links in markdown. This pr
 1. Fork or clone this repo
 2. Enable GitHub Pages (Settings → Pages → Source: main branch)
 3. Use links like: `https://YOUR_USERNAME.github.io/obsidian-redirect/?vault=VAULT&file=PATH`
+
+## Agent skill
+
+`skill/` is the `obsidian-links` skill: it tells agents to give Sash these links and includes `scripts/obsidian_link.py`, which turns file paths into links. Symlink it into an agent's skills folder:
+
+```bash
+ln -sfn ~/p/tools/obsidian-redirect/skill ~/.claude/skills/obsidian-links
+```
