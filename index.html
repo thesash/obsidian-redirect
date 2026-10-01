@@ -16,6 +16,13 @@
     }
     .container {
       text-align: center;
+      padding: 0 1.5em;
+    }
+    .hint {
+      color: #8a8a8a;
+      font-size: 0.9em;
+      max-width: 20em;
+      margin: 2em auto 0;
     }
     a {
       color: #a88bfa;
@@ -26,7 +33,8 @@
 <body>
   <div class="container">
     <p>Opening in Obsidian...</p>
-    <p><a id="fallback" href="#">Click here if it doesn't open automatically</a></p>
+    <p><a id="fallback" href="#">Open it again</a></p>
+    <p id="sync-hint" class="hint">If Obsidian says the note doesn't exist, it hasn't synced to this device yet.<br>Give Obsidian a few seconds, then open it again.</p>
   </div>
   <script>
     // The projects' docs vaults were combined into desk on 2026-09-30, each at its own folder:
@@ -50,9 +58,14 @@
       query.set('vault', 'desk');
       query.set('file', file);
     }
+    // Vaults with the wait-for-sync plugin (plugin/ in this repo) enabled on every device. Its open-synced
+    // action waits for a note that hasn't synced yet instead of reporting it missing.
+    const WAITS_FOR_SYNC = [];
+    const action = WAITS_FOR_SYNC.includes(query.get('vault')) ? 'open-synced' : 'open';
+    if (action === 'open-synced') document.getElementById('sync-hint').remove();
     const params = query.toString().replace(/\+/g, '%20');
     if (params) {
-      const obsidianUrl = 'obsidian://open?' + params;
+      const obsidianUrl = 'obsidian://' + action + '?' + params;
       document.getElementById('fallback').href = obsidianUrl;
       window.location = obsidianUrl;
     } else {

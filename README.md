@@ -30,3 +30,9 @@ Telegram (and other apps) don't support `obsidian://` links in markdown. This pr
 ```bash
 ln -sfn ~/p/tools/obsidian-redirect/skill ~/.claude/skills/obsidian-links
 ```
+
+## Notes that haven't synced yet
+
+An agent's new note reaches Obsidian Sync within a second, but a phone or laptop only pulls it once Obsidian is open and reconnected. A link opened right away reaches Obsidian before the note does, and Obsidian reports it missing. The page tells you to open it again in a few seconds.
+
+`plugin/` is the `wait-for-sync` Obsidian plugin. It adds `obsidian://open-synced`, which takes the same parameters as `obsidian://open` and waits up to three minutes for the note to arrive instead of failing. To use it in a vault, copy `plugin/manifest.json` and `plugin/main.js` into `<vault>/.obsidian/plugins/wait-for-sync/`, enable it on every device, then add the vault to `WAITS_FOR_SYNC` in `index.html`.
