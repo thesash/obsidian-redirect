@@ -58,7 +58,7 @@
       query.set('vault', 'desk');
       query.set('file', file);
     }
-    // Vaults with the wait-for-sync plugin (plugin/ in this repo) enabled on every device. Its open-synced
+    // Vaults with the wait-for-sync plugin (thesash/obsidian-wait-for-sync) enabled on every device. Its open-synced
     // action waits for a note that hasn't synced yet instead of reporting it missing.
     const WAITS_FOR_SYNC = [];
     const action = WAITS_FOR_SYNC.includes(query.get('vault')) ? 'open-synced' : 'open';
