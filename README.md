@@ -35,4 +35,4 @@ ln -sfn ~/p/tools/obsidian-redirect/skill ~/.claude/skills/obsidian-links
 
 An agent's new note reaches Obsidian Sync within a second, but a phone or laptop only pulls it once Obsidian is open and reconnected. A link opened right away reaches Obsidian before the note does, and Obsidian reports it missing. The page tells you to open it again in a few seconds.
 
-The [wait-for-sync](https://github.com/thesash/obsidian-wait-for-sync) Obsidian plugin adds `obsidian://open-synced`, which takes the same parameters as `obsidian://open` and waits up to three minutes for the note to arrive instead of failing. Install it in a vault through BRAT, enable it on every device, then add the vault to `WAITS_FOR_SYNC` in `index.html`.
+The [wait-for-sync](https://github.com/thesash/obsidian-wait-for-sync) Obsidian plugin makes the page's plain `obsidian://open` links wait up to three minutes for the note to arrive instead of failing. Install it in a vault through BRAT; nothing on the page changes. A device without it opens the same links the usual way.

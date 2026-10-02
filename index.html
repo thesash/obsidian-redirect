@@ -35,7 +35,6 @@
     <p>Opening in Obsidian...</p>
     <p><a id="fallback" href="#">Open it again</a></p>
     <p id="sync-hint" class="hint">If Obsidian says the note doesn't exist, it hasn't synced to this device yet.<br>Give Obsidian a few seconds, then open it again.</p>
-    <p id="plain-hint" class="hint" hidden>If Obsidian says "Unrecognized URI action", Wait for sync is off in this vault on this device.<br><a id="plain-open" href="#">Open it without waiting</a></p>
   </div>
   <script>
     // The projects' docs vaults were combined into desk on 2026-09-30, each at its own folder:
@@ -59,20 +58,12 @@
       query.set('vault', 'desk');
       query.set('file', file);
     }
-    // Vaults with the wait-for-sync plugin (thesash/obsidian-wait-for-sync) enabled on every device. Its open-synced
-    // action waits for a note that hasn't synced yet instead of reporting it missing.
-    const WAITS_FOR_SYNC = ['knowledge', 'desk', 'brain'];
-    const action = WAITS_FOR_SYNC.includes(query.get('vault')) ? 'open-synced' : 'open';
-    // Obsidian doesn't tell the page when it can't handle an action, so offer a plain open for a device where the plugin is off.
-    if (action === 'open-synced') {
-      document.getElementById('sync-hint').remove();
-      document.getElementById('plain-hint').hidden = false;
-    }
+    // In a vault with the wait-for-sync plugin (thesash/obsidian-wait-for-sync), an open link waits for a note that
+    // hasn't synced yet instead of reporting it missing. Without the plugin it opens as usual, so the hint stays.
     const params = query.toString().replace(/\+/g, '%20');
     if (params) {
-      const obsidianUrl = 'obsidian://' + action + '?' + params;
+      const obsidianUrl = 'obsidian://open?' + params;
       document.getElementById('fallback').href = obsidianUrl;
-      document.getElementById('plain-open').href = 'obsidian://open?' + params;
       window.location = obsidianUrl;
     } else {
       document.querySelector('.container').innerHTML = '<p>Missing parameters. Use ?vault=...&file=...</p>';
