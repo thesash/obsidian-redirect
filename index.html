@@ -2,39 +2,84 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#1e1e1e">
   <title>Opening in Obsidian...</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      min-height: 100dvh;
       margin: 0;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
       background: #1e1e1e;
-      color: #a88bfa;
+      color: #dcddde;
+      -webkit-text-size-adjust: 100%;
     }
     .container {
+      width: 100%;
+      max-width: 24em;
+      padding: 1.5em;
       text-align: center;
-      padding: 0 1.5em;
+    }
+    .status {
+      color: #a88bfa;
+      font-size: 1.05em;
+      margin: 0 0 0.75em;
+    }
+    .note {
+      font-size: 1.35em;
+      font-weight: 600;
+      line-height: 1.3;
+      margin: 0;
+      overflow-wrap: anywhere;
+    }
+    .vault {
+      color: #8a8a8a;
+      font-size: 0.9em;
+      margin: 0.35em 0 0;
+    }
+    .note:empty, .vault:empty {
+      display: none;
+    }
+    .button {
+      display: block;
+      width: 100%;
+      margin: 2em 0 0;
+      padding: 0.9em 1em;
+      border-radius: 0.75em;
+      background: #7c5cff;
+      color: #fff;
+      font-size: 1.05em;
+      font-weight: 600;
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .button:active {
+      background: #6a4be0;
     }
     .hint {
       color: #8a8a8a;
       font-size: 0.9em;
-      max-width: 20em;
-      margin: 2em auto 0;
-    }
-    a {
-      color: #a88bfa;
-      text-decoration: underline;
+      line-height: 1.45;
+      margin: 1.5em 0 0;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <p>Opening in Obsidian...</p>
-    <p><a id="fallback" href="#">Open it again</a></p>
-    <p id="sync-hint" class="hint">If Obsidian says the note doesn't exist, it hasn't synced to this device yet.<br>Give Obsidian a few seconds, then open it again.</p>
+    <p class="status">Opening in Obsidian...</p>
+    <p id="note" class="note"></p>
+    <p id="vault" class="vault"></p>
+    <a id="fallback" class="button" href="#">Open it again</a>
+    <p id="sync-hint" class="hint">If Obsidian says the note doesn't exist, it hasn't synced to this device yet. Give Obsidian a few seconds, then open it again.</p>
   </div>
   <script>
     // The projects' docs vaults were combined into desk on 2026-09-30, each at its own folder:
@@ -63,10 +108,13 @@
     const params = query.toString().replace(/\+/g, '%20');
     if (params) {
       const obsidianUrl = 'obsidian://open?' + params;
+      const file = query.get('file') || '';
+      document.getElementById('note').textContent = file.split('/').pop().replace(/\.md$/, '');
+      document.getElementById('vault').textContent = query.get('vault') || '';
       document.getElementById('fallback').href = obsidianUrl;
       window.location = obsidianUrl;
     } else {
-      document.querySelector('.container').innerHTML = '<p>Missing parameters. Use ?vault=...&file=...</p>';
+      document.querySelector('.container').innerHTML = '<p class="status">Missing parameters. Use ?vault=...&file=...</p>';
     }
   </script>
 </body>
