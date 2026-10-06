@@ -12,7 +12,7 @@ https://thesash.github.io/obsidian-redirect/?vault=<vault>&file=<path>
 ```
 
 - `<vault>` is the vault's folder name: the nearest ancestor folder that contains `.obsidian`.
-- Except a repo's docs folder (kitchen-docs, artwork-docs, coyote-docs, foxy-docs, tracer-docs, miso-docs): Sash opens those inside the `desk` vault, so the vault is `desk` and the path starts with the folder, e.g. `vault=desk&file=kitchen-docs%2FPrinciples` for `~/p/kitchen/kitchen-docs/Principles.md`.
+- Except a repo's docs folder (kitchen-docs, artwork-docs, coyote-docs, foxy-docs, tracer-docs, miso-docs, closet-docs): Sash opens those inside the `desk` vault, so the vault is `desk` and the path starts with the folder, e.g. `vault=desk&file=kitchen-docs%2FPrinciples` for `~/p/kitchen/kitchen-docs/Principles.md`.
 - `<path>` is the file's path from the vault root, URL-encoded. Drop `.md`; keep other extensions such as `.canvas` and `.base`.
 
 ## Make the links with the script
