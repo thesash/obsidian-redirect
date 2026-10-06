@@ -7,7 +7,7 @@ from urllib.parse import quote
 REDIRECT = "https://thesash.github.io/obsidian-redirect/"
 # Docs folders that Sash opens inside the desk vault, at desk/<folder>. Agents edit them in their repo
 # checkouts (~/p/kitchen/kitchen-docs), which still have their own .obsidian.
-IN_DESK = {"kitchen-docs", "artwork-docs", "coyote-docs", "foxy-docs", "tracer-docs"}
+IN_DESK = {"kitchen-docs", "artwork-docs", "coyote-docs", "foxy-docs", "tracer-docs", "miso-docs"}
 
 
 def vault_root(path: Path):
