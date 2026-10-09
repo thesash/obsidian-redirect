@@ -25,7 +25,7 @@ Telegram (and other apps) don't support `obsidian://` links in markdown. This pr
 
 ## Agent skill
 
-`skill/` is the `obsidian-links` skill: it tells agents to give Sash these links and includes `scripts/obsidian_link.py`, which turns file paths into links. Symlink it into an agent's skills folder:
+`skill/` is the `obsidian-links` skill: it tells agents to give Sash a note's Artwork link when Artwork has the note (its front matter has `artwork_url:`), and one of these links only when it doesn't, and includes `scripts/obsidian_link.py`, which turns file paths into those links. Symlink it into an agent's skills folder:
 
 ```bash
 ln -sfn ~/p/tools/obsidian-redirect/skill ~/.claude/skills/obsidian-links
