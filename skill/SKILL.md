@@ -1,5 +1,5 @@
 ---
-name: obsidian-links
+name: note-links
 description: Give Sash links to notes: the Artwork link when Artwork has the file, and an Obsidian web link only when it doesn't. Use whenever you create, edit, move or mention a file inside an Obsidian vault (any folder with a `.obsidian` directory, such as the knowledge vault, brain, desk, or a repo's docs folder like kitchen-docs or artwork-docs), and end your reply with a link to each file.
 ---
 
@@ -12,7 +12,7 @@ Artwork has a note when its front matter carries `artwork_url:`. Artwork's mirro
 ## Make the links with the script
 
 ```sh
-python3 <skill-dir>/scripts/obsidian_link.py path/to/note.md [more files...]
+python3 <skill-dir>/scripts/note_link.py path/to/note.md [more files...]
 ```
 
 It prints one Markdown link per file, titled with the file name: the file's `artwork_url` when it has one, else the Obsidian link. For a file in a repo's docs folder it also reads the desk copy, which gains `artwork_url` before the repo's does. It exits with an error for a file that isn't inside a vault; give the plain path for those. `--obsidian` forces Obsidian links, for when Sash asks for one.

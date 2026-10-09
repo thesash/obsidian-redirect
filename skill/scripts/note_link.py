@@ -65,6 +65,6 @@ if __name__ == "__main__":
     obsidian_only = "--obsidian" in args
     files = [a for a in args if a != "--obsidian"]
     if not files:
-        raise SystemExit("usage: obsidian_link.py [--obsidian] FILE [FILE...]")
+        raise SystemExit("usage: note_link.py [--obsidian] FILE [FILE...]")
     for arg in files:
         print(link(arg, obsidian_only))
