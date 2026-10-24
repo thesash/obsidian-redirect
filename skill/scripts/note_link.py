@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Print a link for each file inside an Obsidian vault: its Artwork link when Artwork has the file, else an
-Obsidian redirect link."""
+"""Print a link for each file inside an Obsidian vault or the Artwork folder (~/Artwork): its Artwork link when
+Artwork has the file, else an Obsidian redirect link."""
 import sys
 from pathlib import Path
 from urllib.parse import quote
@@ -41,6 +41,10 @@ def link(arg: str, obsidian_only: bool = False) -> str:
     path = Path(arg).expanduser().resolve()
     root = vault_root(path)
     if root is None:
+        # The Artwork folder (~/Artwork/<Workspace>) holds no Obsidian vault: its documents link to Artwork.
+        url = None if obsidian_only else artwork_url(path)
+        if url:
+            return f"[{path.stem}]({url})"
         raise SystemExit(f"Not inside an Obsidian vault: {arg}")
     rel = path.relative_to(root).as_posix()
     vault = root.name
