@@ -1,0 +1,20 @@
+name: reviewed
+
+# The review and description check every repo runs from kitchen's main (.github/actions/reviewed), so a pull
+# request here can't loosen the rules it is judged by. Required on main by the repo's ruleset.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: reviewed-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  reviewed:
+    runs-on: ubicloud-standard-2
+    steps:
+      - uses: thesash/kitchen/.github/actions/reviewed@main
