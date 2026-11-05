@@ -1,0 +1,8 @@
+# Code owners: the paths whose mistakes can't be cleanly undone or reach past our own machines (secrets and
+# access, money, messages sent as the owner, data people rely on, the guardrails, architecture that's hard to
+# undo). Main's ruleset requires a code owner's review, so a pull request that changes one waits for Sash's
+# approving review; every other change lands on its checks. This file is the one list: edit it here.
+
+# Guardrails: this file and the workflows CI runs, the reviewed check among them.
+/.github/CODEOWNERS @thesash
+/.github/workflows/ @thesash
