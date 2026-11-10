@@ -25,7 +25,7 @@ Telegram (and other apps) don't support `obsidian://` links in markdown. This pr
 
 ## Agent skill
 
-Agents make these links with the `kitchen-artwork` skill in [agent-config](https://github.com/thesash/agent-config) (`skills/kitchen-artwork`), whose `scripts/note_link.py` gives a note's Artwork link when Artwork has it and one of these links when it doesn't. It was this repo's `note-links` skill until 2026-10-30.
+Agents make these links with the `desk-docs` skill in [agent-config](https://github.com/thesash/agent-config) (`skills/desk-docs`), whose `scripts/note_link.py` gives a note's Artwork link when Artwork has it and one of these links when it doesn't. It was this repo's `note-links` skill until 2026-10-30.
 
 ## Notes that haven't synced yet
 
